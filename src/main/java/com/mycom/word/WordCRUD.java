@@ -1,21 +1,25 @@
 package com.mycom.word;
 
+import java.util.Scanner;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class WordCRUD implements ICRUD {
-    ArrayList<Word> list;
+
     Scanner s;
+    ArrayList<Word> list;
     final String fname = "Dictionary.txt";
 
     WordCRUD(Scanner s){
         list = new ArrayList<>();
         this.s = s;
+
     }
 
     @Override
     public Object add() {
+
         System.out.print("=> 난이도(1,2,3) & 새 단어 입력 : ");
         int level = s.nextInt();
         String word = s.nextLine();
@@ -26,11 +30,7 @@ public class WordCRUD implements ICRUD {
         return new Word(0, level, word, meaning);
     }
 
-    public void addItem() {
-        Word one = (Word)add();
-        list.add(one);
-        System.out.println("새 단어가 단어장에 추가되었습니다. ");
-    }
+
 
     @Override
     public int update(Object obj) {
@@ -44,7 +44,7 @@ public class WordCRUD implements ICRUD {
 
     @Override
     public void selectOne(int id) {
-
+        //
     }
 
     public void listAll() {
@@ -76,15 +76,33 @@ public class WordCRUD implements ICRUD {
     public void listAll(int level) {
         int j = 0;
         System.out.println("------------------------------------");
-        for(int i = 0; i < list.size(); i++) {
-            int ilevel = list.get(i).getLevel();
-            if(ilevel != level) continue;
-            System.out.print((j+1) + " ");
-            System.out.println(list.get(i).toString());
+        for (Word word : list) {
+            int ilevel = word.getLevel();
+            if (ilevel != level) continue;
+            System.out.print((j + 1) + " ");
+            System.out.println(word.toString());
             j++;
         }
         System.out.println("------------------------------------");
 
+    }
+
+    public void searchLevel() {
+        System.out.print("=> 원하는 레벨은? (1~3) ");
+        int level = s.nextInt();
+        listAll(level);
+    }
+
+    public void searchWord() {
+        System.out.print("=> 원하는 단어는? ");
+        String keyword = s.next();
+        listAll(keyword);
+    }
+
+    public void addItem() {
+        Word one = (Word)add();
+        list.add(one);
+        System.out.println("새 단어가 단어장에 추가되었습니다. ");
     }
 
     public void updateItem() {
@@ -157,15 +175,5 @@ public class WordCRUD implements ICRUD {
         }
     }
 
-    public void searchLevel() {
-        System.out.print("=> 원하는 레벨은? (1~3) ");
-        int level = s.nextInt();
-        listAll(level);
-    }
 
-    public void searchWord() {
-        System.out.print("=> 원하는 단어는? ");
-        String keyword = s.next();
-        listAll(keyword);
-    }
 }

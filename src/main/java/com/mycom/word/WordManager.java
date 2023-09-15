@@ -2,10 +2,11 @@ package com.mycom.word;
 
 import java.util.Scanner;
 
+
 public class WordManager {
+
     Scanner s = new Scanner(System.in);
     WordCRUD wordCRUD;
-
 
     WordManager(){
         wordCRUD = new WordCRUD(s);
@@ -33,9 +34,6 @@ public class WordManager {
         while(true) {
             int menu = selectMenu();
             if(menu == 0) break;
-            if(menu == 4) {
-                wordCRUD.addItem();
-            }
             else if(menu == 1) {
                 wordCRUD.listAll();
             }
@@ -44,6 +42,9 @@ public class WordManager {
             }
             else if(menu == 3) {
                 wordCRUD.searchWord();
+            }
+            if(menu == 4) {
+                wordCRUD.addItem();
             }
             else if(menu == 5) {
                 wordCRUD.updateItem();
