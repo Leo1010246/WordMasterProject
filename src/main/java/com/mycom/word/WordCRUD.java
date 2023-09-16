@@ -17,35 +17,33 @@ public class WordCRUD implements ICRUD {
 
     }
 
-    @Override
-    public Object add() {
 
-        System.out.print("=> 난이도(1,2,3) & 새 단어 입력 : ");
-        int level = s.nextInt();
-        String word = s.nextLine();
 
-        System.out.print("뜻 입력 : ");
-        String meaning = s.nextLine();
 
-        return new Word(0, level, word, meaning);
+    public void loadFile() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(fname));
+            String line;
+            int count = 0;
+            while(true) {
+                line = br.readLine();
+                if(line == null) break;
+                String data[] = line.split("\\|");
+                int level = Integer.parseInt(data[0]);
+                String word = data[1];
+                String meaning = data[2];
+                list.add(new Word(0, level, word, meaning));
+                count++;
+            }
+            br.close();
+            System.out.println("==> " + count + "개 단어 로딩 완료!\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
 
-    @Override
-    public int update(Object obj) {
-        return 0;
-    }
-
-    @Override
-    public int delete(Object obj) {
-        return 0;
-    }
-
-    @Override
-    public void selectOne(int id) {
-        //
-    }
 
     public void listAll() {
         System.out.println("------------------------------------");
@@ -57,7 +55,6 @@ public class WordCRUD implements ICRUD {
     }
 
     public ArrayList<Integer> listAll(String keyword) {
-
         ArrayList<Integer> idlist = new ArrayList<>();
         int j = 0;
         System.out.println("------------------------------------");
@@ -87,16 +84,34 @@ public class WordCRUD implements ICRUD {
 
     }
 
+
+
+
     public void searchLevel() {
-        System.out.print("=> 원하는 레벨은? (1~3) ");
+        System.out.print("\n=> 레벨(1:초급, 2:중급, 3:고급) 선택: ");
         int level = s.nextInt();
         listAll(level);
     }
 
     public void searchWord() {
-        System.out.print("=> 원하는 단어는? ");
+        System.out.print("\n=> 검색할 단어 입력: ");
         String keyword = s.next();
         listAll(keyword);
+    }
+
+
+
+
+    @Override
+    public Object add() {
+        System.out.print("=> 난이도(1,2,3) & 새 단어 입력 : ");
+        int level = s.nextInt();
+        String word = s.nextLine();
+
+        System.out.print("뜻 입력 : ");
+        String meaning = s.nextLine();
+
+        return new Word(0, level, word, meaning);
     }
 
     public void addItem() {
@@ -104,6 +119,9 @@ public class WordCRUD implements ICRUD {
         list.add(one);
         System.out.println("새 단어가 단어장에 추가되었습니다. ");
     }
+
+
+
 
     public void updateItem() {
         System.out.print("=> 수정할 단어 검색 : ");
@@ -116,8 +134,11 @@ public class WordCRUD implements ICRUD {
         String meaning = s.nextLine();
         Word word = list.get(idlist.get(id-1));
         word.setMeaning(meaning);
-        System.out.println("단어가 수정되었습니다. ");
+        System.out.println("\n단어 수정이 성공적으로 되었습니다!!\n");
     }
+
+
+
 
     public void deleteItem() {
         System.out.print("=> 삭제할 단어 검색 : ");
@@ -129,37 +150,17 @@ public class WordCRUD implements ICRUD {
         System.out.print("=> 정말로 삭제하실래요?(Y/n) ");
         String ans = s.next();
         if(ans.equalsIgnoreCase("y")) {
-            System.out.println(idlist);
+            //System.out.println(idlist);
             list.remove((int)idlist.get(id-1));
-            System.out.println("단어가 삭제되었습니다. ");
+            System.out.println("\n 선택한 단어 삭제 완료!!\n");
         }
         else {
             System.out.println("취소되었습니다. ");
         }
     }
 
-    public void loadFile() {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(fname));
-            String line;
-            int count = 0;
-            while(true) {
-                line = br.readLine();
-                if(line == null) break;
-                String data[] = line.split("\\|");
-                int level = Integer.parseInt(data[0]);
-                String word = data[1];
-                String meaning = data[2];
-                list.add(new Word(0, level, word, meaning));
-                count++;
-            }
-            br.close();
-            System.out.println("==> " + count + "개 로딩 완료!!!");
-        } catch (IOException e) {
-            //TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
+
+
 
     public void saveFile() {
         try {
@@ -168,12 +169,10 @@ public class WordCRUD implements ICRUD {
                 pr.write(one.toFileString() + "\n");
             }
             pr.close();
-            System.out.println("==> 데이터 저장 완료 !!!");
+            System.out.println("\n모든 단어 파일 저장 완료 !!!\n");
         } catch (IOException e) {
-            //TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
-
 
 }

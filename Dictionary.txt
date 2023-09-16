@@ -1,5 +1,39 @@
-3|superintendent|관리자, 감독관
 1|electric|전기, 전기를 생산하는
 2|equipment|장비, 용품
 1|pole|기둥, 장대
-1|formerly|이전에, 예전에
+2|abstract|추상적인
+3|absurd|불합리한
+2|abundant|풍부한
+2|abuse|남용
+1|academy|학술원
+2|accelerate|가속하다, 속도가 가해지다
+1|accent|액센트
+2|accept|받아들이다
+2|access|접근
+1|accident|뜻밖의 사건
+2|accommodate|수용하다
+2|accompany|동반하다
+2|accomplish|이루다
+3|accord|일치하다
+2|account|설명하다, 계산
+3|accumulate|축적하다
+2|accurate|정확한
+2|accuse|고발하다
+2|achieve|성취하다
+2|acid|산, 신
+2|acknowledge|인정하다
+3|acquaint|알리다
+2|acquire|얻다
+3|acquisition|획득
+1|across|가로질러
+1|act|행동하다
+2|activate|활동적으로 하다
+2|actual|현실의
+2|acute|날카로운
+2|adapt|적용시키다
+1|add|추가하다
+2|addict|열중하게 하다
+1|address|말을 걸다
+2|adequate|충분한
+2|adjust|맞추다
+2|administer|관리하다
